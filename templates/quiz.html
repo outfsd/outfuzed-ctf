@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Knowledge Check – Outfuzed</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #faf9f6;
+      --surface: #ffffff;
+      --border: #e8e4dc;
+      --text: #1a1916;
+      --muted: #7a7670;
+      --accent: #2a6b4a;
+      --accent-light: #e8f2ec;
+      --radius: 14px;
+      --radius-sm: 8px;
+    }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 32px;
+      height: 60px;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+    }
+    .logo {
+      font-family: 'DM Serif Display', serif;
+      font-size: 20px;
+      color: var(--text);
+      text-decoration: none;
+    }
+    .logo span { color: var(--accent); }
+    .badge {
+      background: var(--accent-light);
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 500;
+      padding: 4px 10px;
+      border-radius: 99px;
+    }
+    .content {
+      max-width: 560px;
+      margin: 56px auto;
+      padding: 0 24px;
+    }
+    .content h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 34px;
+      font-weight: 400;
+      margin-bottom: 8px;
+      letter-spacing: -0.02em;
+    }
+    .content > p {
+      font-size: 15px;
+      color: var(--muted);
+      margin-bottom: 28px;
+    }
+    .error-banner {
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      color: #b91c1c;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 12px 16px;
+      border-radius: var(--radius-sm);
+      margin-bottom: 20px;
+    }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px;
+    }
+    .q {
+      margin-bottom: 22px;
+    }
+    .q-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      background: var(--accent-light);
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 600;
+      border-radius: 50%;
+      margin-right: 8px;
+    }
+    .q label {
+      display: block;
+      font-size: 15px;
+      font-weight: 500;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .q input {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      background: var(--bg);
+      outline: none;
+      transition: border-color 0.15s, box-shadow 0.15s, background 0.15s;
+    }
+    .q input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(42,107,74,0.12);
+      background: var(--surface);
+    }
+    .q input.correct {
+      border-color: #86efac;
+      background: #f0fdf4;
+    }
+    .check {
+      font-size: 13px;
+      margin-top: 6px;
+      color: var(--accent);
+      font-weight: 500;
+      opacity: 0;
+      transition: opacity 0.15s;
+    }
+    .check.show { opacity: 1; }
+    .submit-btn {
+      width: 100%;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: var(--radius-sm);
+      padding: 16px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 8px;
+      transition: background 0.15s, transform 0.1s;
+    }
+    .submit-btn:hover { background: #1f5238; }
+    .submit-btn:active { transform: scale(0.98); }
+    .progress {
+      font-size: 13px;
+      color: var(--muted);
+      text-align: right;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="logo" href="/">Out<span>fuzz</span>ed</a>
+  <span class="badge">quiz</span>
+</nav>
+
+<div class="content">
+  <h1>Knowledge Check</h1>
+  <p>Answer all four correctly to unlock the vault.</p>
+
+  {% if error %}<div class="error-banner">{{ error }}</div>{% endif %}
+
+  <div class="progress" id="progress">0 / 4 answered</div>
+
+  <form class="card" method="POST" id="quiz-form">
+    <div class="q">
+      <label><span class="q-num">1</span>Which tool did you use to bruteforce the login?</label>
+      <input type="text" name="q1" id="q1" autocomplete="off" required>
+      <div class="check" id="check1">✓ looks right</div>
+    </div>
+    <div class="q">
+      <label><span class="q-num">2</span>Which tool intercepts and inspects HTTP requests?</label>
+      <input type="text" name="q2" id="q2" autocomplete="off" required>
+      <div class="check" id="check2">✓ looks right</div>
+    </div>
+    <div class="q">
+      <label><span class="q-num">3</span>What did you forge to bypass authentication in Level 2?</label>
+      <input type="text" name="q3" id="q3" autocomplete="off" required>
+      <div class="check" id="check3">✓ looks right</div>
+    </div>
+    <div class="q">
+      <label><span class="q-num">4</span>Which tool cracked the Flask secret key?</label>
+      <input type="text" name="q4" id="q4" autocomplete="off" required>
+      <div class="check" id="check4">✓ looks right</div>
+    </div>
+    <button class="submit-btn" type="submit">Submit answers</button>
+  </form>
+</div>
+
+<script>
+  // Purely cosmetic live feedback — real validation still happens server-side.
+  const answers = { q1: "hydra", q2: "burp", q3: "cookie", q4: "flask-unsign" };
+  let answeredCount = 0;
+  const answeredState = {};
+
+  Object.keys(answers).forEach(function(key) {
+    const input = document.getElementById(key);
+    const check = document.getElementById('check' + key.slice(1));
+    input.addEventListener('input', function() {
+      const val = input.value.trim().toLowerCase();
+      const isRight = val === answers[key];
+      input.classList.toggle('correct', isRight);
+      check.classList.toggle('show', isRight);
+
+      if (val.length > 0 && !answeredState[key]) {
+        answeredState[key] = true;
+        answeredCount++;
+      } else if (val.length === 0 && answeredState[key]) {
+        answeredState[key] = false;
+        answeredCount--;
+      }
+      document.getElementById('progress').textContent = answeredCount + ' / 4 answered';
+    });
+  });
+</script>
+
+</body>
+</html>
+

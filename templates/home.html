@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Outfuzed Fruit Store</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #faf9f6;
+      --surface: #ffffff;
+      --border: #e8e4dc;
+      --text: #1a1916;
+      --muted: #7a7670;
+      --accent: #2a6b4a;
+      --accent-light: #e8f2ec;
+      --accent-hover: #1f5238;
+      --radius: 14px;
+      --radius-sm: 8px;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* NAV */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 32px;
+      height: 60px;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .logo {
+      font-family: 'DM Serif Display', serif;
+      font-size: 20px;
+      color: var(--text);
+      letter-spacing: -0.01em;
+    }
+
+    .logo span { color: var(--accent); }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-link {
+      background: none;
+      border: none;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--muted);
+      cursor: pointer;
+      padding: 7px 14px;
+      border-radius: var(--radius-sm);
+      transition: color 0.15s, background 0.15s;
+    }
+
+    .nav-link:hover { color: var(--text); background: var(--bg); }
+    .nav-link.active { color: var(--text); }
+
+    .nav-login {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 8px 18px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .nav-login:hover { background: var(--accent-hover); }
+    .nav-login.outline {
+      background: none;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+    }
+    .nav-login.outline:hover { background: var(--accent-light); }
+
+    /* PAGES */
+    .page { display: none; }
+    .page.active { display: block; }
+
+    /* HOME */
+    .hero {
+      padding: 64px 32px 48px;
+      text-align: center;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      background: var(--accent-light);
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border-radius: 99px;
+      margin-bottom: 20px;
+    }
+
+    .hero h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(32px, 5vw, 52px);
+      font-weight: 400;
+      color: var(--text);
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+
+    .hero p {
+      font-size: 16px;
+      color: var(--muted);
+      max-width: 420px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 20px;
+      padding: 0 32px 64px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.07);
+    }
+
+    .card-img {
+      width: 100%;
+      aspect-ratio: 1 / 0.85;
+      object-fit: cover;
+      background: var(--bg);
+      display: block;
+    }
+
+    .card-img-placeholder {
+      width: 100%;
+      aspect-ratio: 1 / 0.85;
+      background: var(--bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 64px;
+    }
+
+    .card-body {
+      padding: 16px 18px 20px;
+    }
+
+    .card-body h3 {
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .card-body p {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    /* LOGIN */
+    .auth-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: calc(100vh - 60px);
+      padding: 40px 24px;
+    }
+
+    .auth-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 40px 36px;
+      width: 100%;
+      max-width: 360px;
+    }
+
+    .auth-card h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 26px;
+      font-weight: 400;
+      margin-bottom: 6px;
+      letter-spacing: -0.01em;
+    }
+
+    .auth-card .subtitle {
+      font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 28px;
+    }
+
+    .field {
+      margin-bottom: 16px;
+    }
+
+    .field label {
+      display: block;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 7px;
+    }
+
+    .field input {
+      width: 100%;
+      padding: 10px 13px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      color: var(--text);
+      background: var(--bg);
+      outline: none;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+
+    .field input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(42,107,74,0.12);
+      background: var(--surface);
+    }
+
+    .field input::placeholder { color: #bbb; }
+
+    .submit-btn {
+      width: 100%;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: var(--radius-sm);
+      padding: 11px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 500;
+      cursor: pointer;
+      margin-top: 8px;
+      transition: background 0.15s;
+    }
+
+    .submit-btn:hover { background: var(--accent-hover); }
+
+    .auth-footer {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .auth-footer button {
+      background: none;
+      border: none;
+      color: var(--accent);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 22px 0;
+      color: var(--border);
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .divider::before, .divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <span class="logo">Out<span>fuzz</span>ed</span>
+  <div class="nav-links">
+    <button class="nav-link active" onclick="show('home', this)">Shop</button>
+    <button class="nav-link" onclick="show('about', this)">About</button>
+    <button class="nav-login" id="login-nav-btn" onclick="show('login', null)">Login</button>
+  </div>
+</nav>
+
+<!-- HOME -->
+<div id="page-home" class="page active">
+  <div class="hero">
+    <span class="hero-tag">Fresh daily</span>
+    <h2>Nature's finest,<br>delivered to you.</h2>
+    <p>Hand-selected seasonal fruit sourced from local farms. No shortcuts, no compromise.</p>
+  </div>
+
+  <div class="products">
+    <div class="card">
+      <div class="card-img-placeholder">🍎</div>
+      <!-- <img class="card-img" src="/static/apple1.jpg" alt="Apple"> -->
+      <div class="card-body">
+        <h3>Apple</h3>
+        <p>Crisp, fresh, and juicy — picked at peak ripeness.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-img-placeholder">🍌</div>
+      <!-- <img class="card-img" src="/static/banana.jpg" alt="Banana"> -->
+      <div class="card-body">
+        <h3>Banana</h3>
+        <p>Sweet, energy-boosting, and always in season.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-img-placeholder">🥭</div>
+      <!-- <img class="card-img" src="/static/mango.jpg" alt="Mango"> -->
+      <div class="card-body">
+        <h3>Mango</h3>
+        <p>Tropical, juicy, and refreshingly golden.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<div id="page-about" class="page">
+  <div class="hero">
+    <span class="hero-tag">Our story</span>
+    <h2>Built on freshness,<br>grown with care.</h2>
+    <p>Outfuzed was founded with one belief: everyone deserves access to genuinely fresh fruit. We work directly with local growers so you get the good stuff.</p>
+  </div>
+</div>
+
+
+<!-- HONEYPOT LOGIN -->
+<div id="page-login" class="page">
+  <div class="auth-wrap">
+    <div class="auth-card">
+      <h2>Welcome back</h2>
+      <p class="subtitle">Sign in to your account</p>
+      <form method="POST" action="/fake-login">
+        <div class="field">
+          <label>Username</label>
+          <input type="text" name="uname" placeholder="Enter username" required />
+        </div>
+        <div class="field">
+          <label>Password</label>
+          <input type="password" name="psw" placeholder="••••••••" required />
+        </div>
+        <button class="submit-btn" type="submit">Sign in</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+  function show(page, navEl) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById('page-' + page).classList.add('active');
+
+    document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+    if (navEl) navEl.classList.add('active');
+
+    const loginBtn = document.getElementById('login-nav-btn');
+    if (page === 'login' || page === 'register') {
+      loginBtn.textContent = '← Shop';
+      loginBtn.classList.add('outline');
+      loginBtn.onclick = () => show('home', document.querySelector('.nav-link'));
+    } else {
+      loginBtn.textContent = 'Login';
+      loginBtn.classList.remove('outline');
+      loginBtn.onclick = () => show('login', null);
+    }
+  }
+</script>
+
+</body>
+</html>

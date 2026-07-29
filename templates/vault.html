@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vault – Outfuzed</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <script>
+    window.onload = function() {
+      confetti({
+        particleCount: 180,
+        spread: 90,
+        origin: { y: 0.6 }
+      });
+    }
+  </script>
+  <audio id="victory" src="/static/victory.wav"></audio>
+  <script>
+    document.addEventListener('click', function() {
+      document.getElementById('victory').play();
+    }, { once: true });
+  </script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #faf9f6;
+      --surface: #ffffff;
+      --border: #e8e4dc;
+      --text: #1a1916;
+      --muted: #7a7670;
+      --accent: #2a6b4a;
+      --accent-light: #e8f2ec;
+      --flag-bg: #f0fdf4;
+      --flag-border: #bbf7d0;
+      --flag-text: #166534;
+      --radius: 14px;
+      --radius-sm: 8px;
+    }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 32px;
+      height: 60px;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+    }
+    .logo {
+      font-family: 'DM Serif Display', serif;
+      font-size: 20px;
+      color: var(--text);
+      text-decoration: none;
+    }
+    .logo span { color: var(--accent); }
+    .badge {
+      background: var(--accent-light);
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 500;
+      padding: 4px 10px;
+      border-radius: 99px;
+    }
+    .content {
+      max-width: 640px;
+      margin: 64px auto;
+      padding: 0 24px;
+      text-align: center;
+    }
+    .content h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 40px;
+      font-weight: 400;
+      margin-bottom: 8px;
+      letter-spacing: -0.02em;
+    }
+    .content p {
+      font-size: 15px;
+      color: var(--muted);
+      margin-bottom: 32px;
+    }
+    .flag-box {
+      background: var(--flag-bg);
+      border: 1px solid var(--flag-border);
+      border-radius: var(--radius);
+      padding: 28px 32px;
+      display: inline-block;
+    }
+    .flag-label {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--flag-text);
+      margin-bottom: 10px;
+    }
+    .flag-value {
+      font-family: 'Courier New', monospace;
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--flag-text);
+      letter-spacing: 0.02em;
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="logo" href="/">Out<span>fuzz</span>ed</a>
+  <span class="badge">vault</span>
+</nav>
+
+<div class="content">
+  <h1>🔓 Vault Unlocked</h1>
+  <p>You made it through recon, bruteforce, and cookie forging — and proved you understood it.</p>
+
+  <div class="flag-box">
+    <div class="flag-label">Final Flag</div>
+    <div class="flag-value">FLAG{knowledge_is_the_real_exploit_789}</div>
+  </div>
+</div>
+
+</body>
+</html>

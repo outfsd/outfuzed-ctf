@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard – Outfuzed</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<script>
+  window.onload = function() {
+    confetti({
+      particleCount: 150,
+      spread: 80,
+      origin: { y: 0.6 }
+    });
+  }
+</script>
+
+<audio id="victory" src="/static/victory.wav"></audio>
+<script>
+  document.addEventListener('click', function() {
+    document.getElementById('victory').play();
+  }, { once: true });
+</script>
+
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #faf9f6;
+      --surface: #ffffff;
+      --border: #e8e4dc;
+      --text: #1a1916;
+      --muted: #7a7670;
+      --accent: #2a6b4a;
+      --accent-light: #e8f2ec;
+      --flag-bg: #f0fdf4;
+      --flag-border: #bbf7d0;
+      --flag-text: #166534;
+      --radius: 14px;
+      --radius-sm: 8px;
+    }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 32px;
+      height: 60px;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+    }
+    .logo {
+      font-family: 'DM Serif Display', serif;
+      font-size: 20px;
+      color: var(--text);
+      text-decoration: none;
+    }
+    .logo span { color: var(--accent); }
+    .badge {
+      background: var(--accent-light);
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 500;
+      padding: 4px 10px;
+      border-radius: 99px;
+    }
+    .content {
+      max-width: 640px;
+      margin: 64px auto;
+      padding: 0 24px;
+    }
+    .content h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 36px;
+      font-weight: 400;
+      margin-bottom: 8px;
+      letter-spacing: -0.02em;
+    }
+    .content p {
+      font-size: 15px;
+      color: var(--muted);
+      margin-bottom: 32px;
+    }
+    .stage-box {
+      background: #0f1923;
+      border: 1px solid #1e3a2f;
+      border-left: 4px solid #2a6b4a;
+      border-radius: var(--radius);
+      padding: 28px 32px;
+      margin-bottom: 20px;
+    }
+    .stage-crown {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      color: #2a6b4a;
+      margin-bottom: 10px;
+    }
+    .stage-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 28px;
+      color: #e8f2ec;
+      margin-bottom: 10px;
+      letter-spacing: -0.02em;
+    }
+    .stage-sub {
+      font-size: 14px;
+      color: #5a7a6a;
+      line-height: 1.6;
+    }
+    .flag-box {
+      background: var(--flag-bg);
+      border: 1px solid var(--flag-border);
+      border-radius: var(--radius);
+      padding: 24px 28px;
+    }
+    .flag-label {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--flag-text);
+      margin-bottom: 10px;
+    }
+    .flag-value {
+      font-family: 'Courier New', monospace;
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--flag-text);
+      letter-spacing: 0.02em;
+    }
+.sound-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #0f1923;
+  color: #e8f2ec;
+  border: 1px solid #2a6b4a;
+  border-radius: var(--radius-sm);
+  padding: 10px 20px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  margin-bottom: 20px;
+  transition: background 0.15s;
+}
+.sound-btn:hover { background: #1a2e3a; }
+
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="logo" href="/">Out<span>fuzz</span>ed</a>
+  <span class="badge">admin</span>
+</nav>
+
+<div class="content">
+  <h1>Dashboard</h1>
+  <p>Welcome back, admin 👋</p>
+
+<button class="sound-btn" onclick="document.getElementById('victory').play()">
+  ▶ Play Sound
+</button>
+<audio id="victory" src="/static/victory.wav"></audio>
+
+  <div class="stage-box">
+    <div class="stage-crown">★ LEVEL 1 COMPLETE ★</div>
+    <div class="stage-title">You brute-forced your way in</div>
+    <div class="stage-sub">Hydra found the credentials. The door was always open — you just had to knock enough times.</div>
+  </div>
+
+  <div class="flag-box">
+    <div class="flag-label">Flag</div>
+    <div class="flag-value">FLAG{you_bruteforced_your_way_in_123}</div>
+  </div>
+</div>
+
+</body>
+</html>

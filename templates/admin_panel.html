@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Panel – Outfuzed</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet" />
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<script>
+  window.onload = function() {
+    confetti({
+      particleCount: 150,
+      spread: 80,
+      origin: { y: 0.6 }
+    });
+  }
+</script>
+
+<audio id="victory" src="/static/victory.wav"></audio>
+<script>
+  document.addEventListener('click', function() {
+    document.getElementById('victory').play();
+  }, { once: true });
+</script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #faf9f6;
+      --surface: #ffffff;
+      --border: #e8e4dc;
+      --text: #1a1916;
+      --muted: #7a7670;
+      --accent: #2a6b4a;
+      --accent-light: #e8f2ec;
+      --flag-bg: #f0fdf4;
+      --flag-border: #bbf7d0;
+      --flag-text: #166534;
+      --radius: 14px;
+      --radius-sm: 8px;
+    }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 32px;
+      height: 60px;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+    }
+    .logo {
+      font-family: 'DM Serif Display', serif;
+      font-size: 20px;
+      color: var(--text);
+      text-decoration: none;
+    }
+    .logo span { color: var(--accent); }
+    .badge {
+      background: #fde8c8;
+      color: #92400e;
+      font-size: 12px;
+      font-weight: 500;
+      padding: 4px 10px;
+      border-radius: 99px;
+    }
+    .content {
+      max-width: 640px;
+      margin: 64px auto;
+      padding: 0 24px;
+    }
+    .content h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 36px;
+      font-weight: 400;
+      margin-bottom: 8px;
+      letter-spacing: -0.02em;
+    }
+    .content p {
+      font-size: 15px;
+      color: var(--muted);
+      margin-bottom: 32px;
+    }
+    .stage-box {
+      background: #0f1923;
+      border: 1px solid #1e3a2f;
+      border-left: 4px solid #2a6b4a;
+      border-radius: var(--radius);
+      padding: 28px 32px;
+      margin-bottom: 20px;
+    }
+    .stage-crown {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      color: #2a6b4a;
+      margin-bottom: 10px;
+    }
+    .stage-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 28px;
+      color: #e8f2ec;
+      margin-bottom: 10px;
+      letter-spacing: -0.02em;
+    }
+    .stage-sub {
+      font-size: 14px;
+      color: #5a7a6a;
+      line-height: 1.6;
+    }
+    .flag-box {
+      background: var(--flag-bg);
+      border: 1px solid var(--flag-border);
+      border-radius: var(--radius);
+      padding: 24px 28px;
+    }
+    .flag-label {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--flag-text);
+      margin-bottom: 10px;
+    }
+    .flag-value {
+      font-family: 'Courier New', monospace;
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--flag-text);
+      letter-spacing: 0.02em;
+    }
+
+.hint-box {
+  background: #fffbeb;
+  border: 1px solid #fde68a;
+  border-radius: 14px;
+  padding: 20px 24px;
+  margin-top: 20px;
+}
+.hint-label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #92400e;
+  margin-bottom: 8px;
+}
+.hint-value {
+  font-family: 'Courier New', monospace;
+  font-size: 16px;
+  font-weight: 600;
+  color: #92400e;
+}
+
+
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="logo" href="/">Out<span>fuzz</span>ed</a>
+  <span class="badge">superadmin</span>
+</nav>
+
+<div class="content">
+  <h1>Admin Panel</h1>
+  <p>Welcome, superadmin 👑</p>
+
+  <div class="stage-box">
+    <div class="stage-crown">★ LEVEL 2 COMPLETE ★</div>
+    <div class="stage-title">You forged your way in</div>
+    <div class="stage-sub">No password needed — you cracked the secret key and signed your own ticket in.</div>
+  </div>
+
+
+<div class="flag-box">
+    <div class="flag-label">Flag</div>
+    <div class="flag-value">FLAG{cooked_the_cookie_myself_456}</div>
+  </div>
+
+  <div class="hint-box">
+    <div class="hint-label">Not done yet</div>
+    <div class="hint-value">this isn't the last flag — prove what you learned</div>
+  </div>
+
+  <a href="/quiz" style="display:inline-block; margin-top:16px; width:100%; box-sizing:border-box; text-align:center; background:#2a6b4a; color:#fff; padding:16px; border-radius:14px; text-decoration:none; font-size:16px; font-weight:600;">
+    Take the Knowledge Check →
+  </a>
+
+</div>
+
+</body>
+</html>

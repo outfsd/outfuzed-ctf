@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard – Outfuzed</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #faf9f6;
+      --surface: #ffffff;
+      --border: #e8e4dc;
+      --text: #1a1916;
+      --muted: #7a7670;
+      --accent: #2a6b4a;
+      --accent-light: #e8f2ec;
+      --radius: 14px;
+      --radius-sm: 8px;
+    }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 32px;
+      height: 60px;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+    }
+    .logo {
+      font-family: 'DM Serif Display', serif;
+      font-size: 20px;
+      color: var(--text);
+      text-decoration: none;
+    }
+    .logo span { color: var(--accent); }
+    .badge {
+      background: var(--accent-light);
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 500;
+      padding: 4px 10px;
+      border-radius: 99px;
+    }
+    .content {
+      max-width: 640px;
+      margin: 64px auto;
+      padding: 0 24px;
+    }
+    .content h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 36px;
+      font-weight: 400;
+      margin-bottom: 8px;
+      letter-spacing: -0.02em;
+    }
+    .content p {
+      font-size: 15px;
+      color: var(--muted);
+      margin-bottom: 32px;
+    }
+    .warn-box {
+      background: #fff8f0;
+      border: 1px solid #fde8c8;
+      border-radius: var(--radius);
+      padding: 24px 28px;
+    }
+    .warn-label {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #92400e;
+      margin-bottom: 10px;
+    }
+    .warn-value {
+      font-family: 'Courier New', monospace;
+      font-size: 15px;
+      color: #92400e;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="logo" href="/">Out<span>fuzz</span>ed</a>
+  <span class="badge">guest</span>
+</nav>
+
+<div class="content">
+  <h1>Dashboard</h1>
+  <p>Welcome 👋</p>
+
+  <div class="warn-box">
+    <div class="warn-label">Notice</div>
+    <div class="warn-value">
+      This is not the real login portal.<br>
+      You are in the wrong place.<br>
+      The real admin panel is elsewhere.
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

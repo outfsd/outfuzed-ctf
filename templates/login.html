@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+
+</head>
+<body>
+
+{% if error %}
+<div class="error-box">{{ error }}</div>
+{% endif %}
+
+<form action="/login" method="POST">
+
+    <div class="imgcontainer">
+        <img src="{{ url_for('static', filename='img_avatar2.png') }}" alt="Avatar" class="avatar">
+    </div>
+
+    <div class="container">
+
+        <label><b>Username</b></label>
+        <input type="text" name="uname" placeholder="Enter Username" required>
+
+        <label><b>Password</b></label>
+        <input type="password" name="psw" placeholder="Enter Password" required>
+
+
+        <button type="submit">Login</button>
+
+        <label>
+            <input type="checkbox" name="remember" checked> Remember me
+        </label>
+
+    </div>
+
+    <div class="container" style="background-color:#f1f1f1">
+        <button type="button" class="cancelbtn">Cancel</button>
+        <span class="psw">Forgot <a href="#">password?</a></span>
+    </div>
+
+</form>
+
+</body>
+</html>
