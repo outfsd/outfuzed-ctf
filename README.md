@@ -108,3 +108,5 @@ http://127.0.0.1:5000/admin-panel
 ---
 
 **Note:** press F12 to open DevTools.
+**Note:**
+I used AI (Claude) as a support tool for planning and troubleshooting while building this project.
