@@ -1,6 +1,11 @@
 # Outfuzed – CTF Writeup
 
-A small self-hosted Flask CTF: a fake fruit-store site hiding a login flow, a forgeable session cookie, and a final knowledge check.
+
+# How I built it
+Outfuzed is a small self-hosted Flask CTF: a fake fruit-store website hiding a login flow, a forgeable session cookie and a knowledge check. It consists of three levels, which are explained below. I built it with Python and Flask and hosted it on my VM. Each Level is a a seperate route with its own flag, and the session cookie is intentionally signed with a weak secret so it can be forged.
+
+# Play it
+The CTF is also available as Tryhackme room: https://tryhackme.com/jr/outfuzedctf
 
 ## Hosting
 
